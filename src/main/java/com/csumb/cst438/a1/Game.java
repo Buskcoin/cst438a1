@@ -50,7 +50,7 @@ public class Game {
     
     public void startNewGame() {
         state = 1;
-        word = "computer";
+        word = randomWord();
         createDisplayWord();
         
     }
@@ -64,6 +64,9 @@ public class Game {
      *        3 = bad guess.  Lost game.
      */
     public int playGame(char guess) {
+            if(Character.isLetter(guess) == false){
+                return 4;
+            }
             boolean correctGuess = updateDisplayWord(guess);
             if (correctGuess==false) { 
                 state++;
