@@ -93,12 +93,13 @@ public class MyHttpServer {
                                             + "</body></html>";
                                              cookie="0";
                                              break;
-                                        case 4: // bad guess, lost game
+                                        case 4: // bad character, continue game game
                                              response = "<!DOCTYPE html><html><head><title>MyHttpServer</title></head><body><h2>Hangman</h2>"
-                                            + "<img src=\"" + "h" + game.getState() + ".gif" + "\">"
+                                            +"<div class=\"alert alert-warning\" style=\"background-color: #f44336\">\n" +"  <strong>ERROR!</strong> Please enter a valid letter!.\n" +"</div>" 
+                                            + "<img src=\"" + "h" + game.getState() + ".gif" + "\">" 
                                             + "<h2 style=\"font-family:'Lucida Console', monospace\"> " + game.getDisplayWord() + "</h2>"
                                             + "<form action=\"/\" method=\"get\"> "
-                                            + "Please Enter a valid letter <input type=\"text\" name=\"guess\"><br>"
+                                            + "Guess a character  <input type=\"text\" name=\"guess\"><br>"
                                             + "<input type=\"submit\" value=\"Submit\">" + "</form></body></html>";
                                              break;
                                     }
