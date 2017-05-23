@@ -125,22 +125,13 @@ public class GameTest {
         assertEquals(3,result);
  
         instance.startNewGame();
-        result = instance.playGame('c');
-        assertEquals(0,result);
-        result = instance.playGame('o');
-        assertEquals(0,result);
-        result = instance.playGame('m');
-        assertEquals(0,result);
-        result = instance.playGame('p');
-        assertEquals(0,result);
-        result = instance.playGame('u');
-        assertEquals(0,result);
-        result = instance.playGame('t');
-        assertEquals(0,result);
-        result = instance.playGame('e');
-        assertEquals(0,result);
-        result = instance.playGame('r');
-        assertEquals(1,result);
+        String randWord = instance.getWord();
+        for(int i = 0; i < randWord.length()-1; i++){
+            result = instance.playGame(randWord.charAt(i));
+            assertEquals(0,result);
+        }
+         result = instance.playGame(randWord.charAt(randWord.length()-1));
+            assertEquals(1,result);
     }
     
 }
