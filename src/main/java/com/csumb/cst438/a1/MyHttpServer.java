@@ -3,6 +3,8 @@ import java.net.*;
 import java.util.*;
 import com.sun.net.httpserver.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MyHttpServer {
 
@@ -138,6 +140,12 @@ public class MyHttpServer {
                                 os.close();
 
                         } catch (Exception e) {
+        
+                            try {
+                                t.sendResponseHeaders(404, 0);
+                            } catch (IOException ex) {
+                                Logger.getLogger(MyHttpServer.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                                 System.out.println("Error in sendFile:" + filename + " " + e.getMessage());
                         }
 

@@ -10,8 +10,10 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 import com.sun.net.httpserver.Headers;
+import com.sun.xml.internal.ws.server.sei.EndpointArgumentsBuilder;
 
 /**
  *
@@ -68,6 +70,45 @@ public class MyHttpServerTest {
     } catch (Exception e) {
         fail("unexpected exception in testHandle "+e.getMessage());
     }
+    }
+    
+       /**
+     * tests for a successful download of h1.gif file
+     */
+    @org.junit.Test
+    public void gifDownloadTest(){
+         Headers header = new Headers();
+    try {
+        TestHttpExchange mockup = new TestHttpExchange("/h1.gif", header);
+        MyHttpServer.MyHandler handler = new MyHttpServer.MyHandler();
+        handler.handle(mockup);
+        //System.out.println("Response body: "+ mockup.getResponseBody());
+        // check response for cookie returned, response code=200, and expected response body 
+        Headers response = mockup.getResponseHeaders();
+        
+          assertEquals("Bad content type", "image/gif", response.getFirst("Content-Type"));
+        
+    } catch (Exception e) {
+        fail("unexpected exception in testHandle "+e.getMessage());
+    }
+        assertEquals(this, this);
+    }
+    
+     @org.junit.Test
+    public void badGifDownloadTest(){
+         Headers header = new Headers();
+    try {
+        TestHttpExchange mockup = new TestHttpExchange("/h9.gif", header);
+        MyHttpServer.MyHandler handler = new MyHttpServer.MyHandler();
+        handler.handle(mockup);
+        // check response for cookie returned, response code=200, and expected response body 
+        Headers response = mockup.getResponseHeaders();
+        assertEquals("Bad response code.",404,mockup.getResponseCode());
+        
+    } catch (Exception e) {
+        fail("unexpected exception in testHandle "+e.getMessage());
+    }
+        assertEquals(this, this);
     }
     
 }
