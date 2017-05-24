@@ -64,7 +64,7 @@ public class MyHttpServerTest {
         assertEquals("Bad content type", "text/html", response.getFirst("Content-type"));
         assertNotNull("No cookie returned", cookie1);
         assertEquals("Bad response code.",200, t.getResponseCode());
-        assertEquals("Bad response body.",expectedBody, t.getOstream().toString());
+        assertEquals("Bad response body.",expectedBody.replaceAll("_+ ", ""), t.getOstream().toString().replaceAll("_+ ",""));
     } catch (Exception e) {
         fail("unexpected exception in testHandle "+e.getMessage());
     }

@@ -32,7 +32,7 @@ public class GameTest {
     @After
     public void tearDown() {
     }
-
+    
     /**
      * Test of getState method, of class Game.
      * at start of game, state should be 1.
@@ -53,7 +53,7 @@ public class GameTest {
         result = instance.getState();
         assertEquals(expResult+1, result);
     }
-
+    
     /**
      * Test of getWord method, of class Game.
      */
@@ -65,7 +65,7 @@ public class GameTest {
         String result = instance.getWord();
         assertEquals(expResult, result);
     }
-
+    
     /**
      * Test of getDisplayWord method, of class Game.
      */
@@ -79,9 +79,9 @@ public class GameTest {
         instance.playGame('r');
         result = instance.getDisplayWord();
         assertEquals("_ _ _ _ _ _ _ r", result);
-
+        
     }
-
+    
     /**
      * Test of startNewGame method, of class Game.
      */
@@ -95,9 +95,9 @@ public class GameTest {
         instance.startNewGame();
         int result = instance.getState();
         assertEquals(1,result);
- 
+        
     }
-
+    
     /**
      * Test of playGame method, of class Game.
      *   correct guess should return 0 , or 1 when game is won
@@ -123,15 +123,21 @@ public class GameTest {
         assertEquals(2,result);
         result = instance.playGame('k');
         assertEquals(3,result);
- 
+        
         instance.startNewGame();
         String randWord = instance.getWord();
-        for(int i = 0; i < randWord.length()-1; i++){
-            result = instance.playGame(randWord.charAt(i));
-            assertEquals(0,result);
+        while(randWord.length() > 0){
+            result = instance.playGame(randWord.charAt(0));
+            randWord = randWord.replaceAll(randWord.charAt(0)+"","");
+            System.out.println("rand word" + randWord);
+            if(randWord.length() <= 0){
+                assertEquals(1, result);
+            } else{
+                assertEquals(0,result);
+            }
         }
-         result = instance.playGame(randWord.charAt(randWord.length()-1));
-            assertEquals(1,result);
+        //Test victory
+        
     }
     
 }
