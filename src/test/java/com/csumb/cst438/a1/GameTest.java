@@ -129,15 +129,12 @@ public class GameTest {
         while(randWord.length() > 0){
             result = instance.playGame(randWord.charAt(0));
             randWord = randWord.replaceAll(randWord.charAt(0)+"","");
-            System.out.println("rand word" + randWord);
             if(randWord.length() <= 0){
                 assertEquals(1, result);
             } else{
                 assertEquals(0,result);
             }
         }
-        //Test victory
-        
     }
     
 }
